@@ -1,4 +1,4 @@
-class Phone {
+export class Phone {
     id?: string;
     brand?: string;
     os?: string;
@@ -10,6 +10,7 @@ class Phone {
     description?: string;
     price?: number;
     photos?: Array<string>;
+    idAuction?: string;
     createdAt?: Date;
     updatedAt?: Date;
     deletedAt?: Date;
@@ -25,6 +26,7 @@ class Phone {
         description?: string,
         price?: number,
         photos?: Array<string>,
+        idAuction?: string,
         createdAt?: Date,
         updatedAt?: Date,
         deletedAt?: Date,
@@ -39,6 +41,7 @@ class Phone {
         this.description = description;
         this.price = price;
         this.photos = photos;
+        this.idAuction = idAuction;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -56,9 +59,10 @@ class Phone {
             description: this.description,
             price: this.price,
             photos: this.photos,
-            createdAt: this.createdAt,
-            updatedAt: this.updatedAt,
-            deletedAt: this.deletedAt
+            idAuction: this.idAuction,
+            createdAt: this.createdAt?.toDateString(),
+            updatedAt: this.updatedAt?.toDateString(),
+            deletedAt: this.deletedAt?.toDateString()
         };
     }
 
@@ -74,9 +78,10 @@ class Phone {
             input.description,
             input.price,
             input.photos,
-            input.createdAt,
-            input.updatedAt,
-            input.deletedAt,
+            input.idAuction,
+            input.createdAt === null || input.createdAt === undefined ? undefined : new Date(input.createdAt),
+            input.updatedAt === null || input.updatedAt === undefined ? undefined : new Date(input.updatedAt),
+            input.deletedAt === null || input.deletedAt === undefined ? undefined : new Date(input.deletedAt),
         );
         phone.id = id;
 

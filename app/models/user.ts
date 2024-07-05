@@ -1,4 +1,4 @@
-class User {
+export class User {
     id?: string;
     name?: string;
     surname?: string;
@@ -39,6 +39,7 @@ class User {
             email: this.email,
             password: this.password,
             isLocked: this.isLocked,
+            role: this.role,
             createdAt: this.createdAt?.toISOString(),
             updatedAt: this.updatedAt?.toISOString(),
             deletedAt: this.deletedAt?.toISOString(),
@@ -54,11 +55,11 @@ class User {
             input.password, 
             input.isLocked, 
             input.role, 
-            input.createdAt, 
-            input.updatedAt, 
-            input.deletedAt
+            input.createdAt === null || input.createdAt === undefined ? undefined : new Date(input.createdAt), 
+            input.updatedAt === null || input.updatedAt === undefined ? undefined : new Date(input.updatedAt), 
+            input.deletedAt === null || input.deletedAt === undefined ? undefined : new Date(input.deletedAt)
         );
-        user.id = id;
+        user.id = id; 
         return user;
     }
 }

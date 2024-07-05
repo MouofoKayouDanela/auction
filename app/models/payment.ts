@@ -1,40 +1,45 @@
-export class Role {
+export class Payment {
     id?: string;
-    intitule?: string;
+    amount?: number;
+    doneBy?: string;
     createdAt?: Date;
     updatedAt?: Date;
     deletedAt?: Date;
 
     constructor(
-        intitule: string, 
+        amount?: number,
+        doneBy?: string,
         createdAt?: Date,
-        updatedAt?: Date, 
+        updatedAt?: Date,
         deletedAt?: Date
     ) {
-        this.intitule = intitule;
+        this.amount = amount;
+        this.doneBy = doneBy;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
     }
 
-    public toMap() {
+    public toMap() : any {
         return {
-            intitule: this.intitule,
-            createdAt: this.createdAt?.toISOString(),
-            updatedAt: this.updatedAt?.toISOString(),
-            deletedAt: this.deletedAt?.toISOString(),
+            amount: this.amount,
+            doneBy: this.doneBy,
+            createdAt: this.createdAt?.toDateString(),
+            updatedAt: this.updatedAt?.toDateString(),
+            deletedAt: this.deletedAt?.toDateString()
         };
     }
 
-    public static fromMap(id: string, input: any) : Role {
-        let role = new Role(
-            input.intitule,
+    public static fromMap(id: string, input: any): Payment {
+        let payment = new Payment(
+            input.amount,
+            input.doneBy,
             input.createdAt === null || input.createdAt === undefined ? undefined : new Date(input.createdAt),
             input.updatedAt === null || input.updatedAt === undefined ? undefined : new Date(input.updatedAt),
             input.deletedAt === null || input.deletedAt === undefined ? undefined : new Date(input.deletedAt),
         );
-        role.id = id;
+        payment.id = id;
 
-        return role;
+        return payment;
     }
 }
